@@ -18,7 +18,7 @@ export default function Cardmain({ user }: { user: User }) {
     const avatarUrl = generateAvatarUrl(user.name);
     return (
   
-    <Group wrap="nowrap">
+    <Group wrap="wrap" justify='center'>
       <Paper radius="md" withBorder p="md" w={300}  bg="var(--mantine-color-body)">
           <Avatar src={avatarUrl} alt={`Avatar for ${user.name}`}  size={110} radius={110} mx="auto" />
         <Text ta="center" fz="lg" p="md" fw={500} mt="md">
