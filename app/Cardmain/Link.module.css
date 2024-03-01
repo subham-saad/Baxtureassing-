@@ -1,0 +1,8 @@
+.customLink {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .customLink:hover {
+    text-decoration: underline; /* Add underline on hover */
+  }
