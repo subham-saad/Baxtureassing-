@@ -1,5 +1,8 @@
-import { Avatar, Text, Button, Paper, Group, SimpleGrid } from '@mantine/core';
-import { IconPhoneCall, IconAt, IconWorldWww, IconUserPlus,IconTrash } from '@tabler/icons-react';
+"use client"
+
+import { useState } from 'react';
+import { Avatar, Text, Button, Paper, Group, Anchor } from '@mantine/core';
+import { IconPhoneCall, IconAt, IconWorldWww, IconUserPlus,IconTrash, IconUserMinus, IconStar } from '@tabler/icons-react';
 import classes from './UserInfoIcons.module.css';
 import cardclasses from './Card.module.css'
 import Link from 'next/link';
@@ -13,8 +16,13 @@ function generateAvatarUrl(userName: string): string {
   } 
 
 
-export default function Cardmain({ user }: { user: User }) {
+export default function Cardmain({ user, onDelete }: { user: User, onDelete: any }) {
+    
+   const [isFollowing, setIsFollowing] = useState(false);
 
+   const handleFollowToggle = () => {
+    setIsFollowing((prevIsFollowing) => !prevIsFollowing);
+  };
     const avatarUrl = generateAvatarUrl(user.name);
     return (
   
@@ -22,12 +30,14 @@ export default function Cardmain({ user }: { user: User }) {
       <Paper radius="md" withBorder p="md" w={300}  bg="var(--mantine-color-body)">
           <Avatar src={avatarUrl} alt={`Avatar for ${user.name}`}  size={110} radius={110} mx="auto" />
         <Text ta="center" fz="lg" p="md" fw={500} mt="md">
-          {user.name}
+          {user.name}{isFollowing?<span style={{ paddingLeft:6, paddingTop:2}}><IconStar color='#000000'  size="1rem" className={classes.icon}/></span>:null}
         </Text>
         <Group wrap="nowrap" gap={4} mt={3}>
         <IconAt stroke={1.5} size="1rem" className={classes.icon} />
         <Text ta="center" c="dimmed" fz="sm">
-          {user.email} 
+          <Anchor target='_blank' underline='hover' c='dimmed' href='#'>
+            {user.email} 
+          </Anchor>
         </Text>
   
         </Group>
@@ -35,9 +45,9 @@ export default function Cardmain({ user }: { user: User }) {
         <Group wrap="nowrap" gap={4} mt={3}>
         <IconPhoneCall stroke={1.5} size="1rem" className={classes.icon} />
         <Text ta="center" c="dimmed" fz="sm">
-        <a className={linksstyle.customLink}  target='_blank'  href={`${user.phone}`}>
+        <Anchor target='_blank' underline='hover' c='dimmed' href={`${user.phone}`}>
           {user.phone}
-        </a> 
+        </Anchor> 
         </Text>
   
       </Group>
@@ -45,19 +55,26 @@ export default function Cardmain({ user }: { user: User }) {
         <IconWorldWww stroke={1.5} size="1rem" className={classes.icon} />
        
       <Text ta="center" c="dimmed" fz="sm">
-        <Link style={{ textDecoration: 'none', color: 'inherit' }}  href={user.company.bs} target="_blank" rel="noopener noreferrer">
+        <a className={linksstyle.customLink}  href={user.company.bs} target="_blank" rel="noopener noreferrer">
           {user.company.bs}
-        </Link>
+        </a>
       </Text>  
         </Group>
         <Group  wrap="nowrap" gap={4} mt={3}>
        
-        <Button variant="primary" fullWidth mt="md">
-        <IconUserPlus color='white' stroke={3} size="1rem" className={classes.icon}  />
-          <span style={{paddingLeft:"10px"}}>Follow</span>
-        </Button>
+        {isFollowing ? (
+            <Button variant="default" fullWidth mt="md" onClick={handleFollowToggle}>
+              <IconUserMinus color="#000000" stroke={1.5} size="1rem" className={classes.icon} />
+              <span style={{ color: '#000000', paddingLeft: '10px' }}>Unfollow</span>
+            </Button>
+          ) : (
+            <Button variant="primary" fullWidth mt="md" onClick={handleFollowToggle}>
+              <IconUserPlus color="white" stroke={3} size="1rem" className={classes.icon} />
+              <span style={{ paddingLeft: '10px' }}>Follow</span>
+            </Button>
+          )}
         
-        <Button px={24} variant="default" fullWidth mt="md">
+        <Button px={24} variant="default" fullWidth mt="md" onClick={onDelete}>
           <IconTrash color='#3498DB' stroke={1.5} size="1rem" className={classes.icon} /> 
           <span style={{color:"#3498DB", paddingLeft:"10px"}}>Delete</span>
         </Button>

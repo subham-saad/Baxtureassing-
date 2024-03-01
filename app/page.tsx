@@ -33,6 +33,15 @@ export default function HomePage() {
 
     fetchData();
   }, []);
+  const handleDelete = (userId: number) => {
+    // Update state to remove the user with the specified ID
+    setUserData((prevUserData) => prevUserData?.filter((user) => user.id !== userId) || null);
+  };
+
+  if (!userData) {
+    return null;
+  }
+
 
   if (!userData) {
     return null; // You can render a loading state or handle it as per your UI design
@@ -45,11 +54,11 @@ export default function HomePage() {
       mx={24}
       ms={20}
       cols={{ base: 1, sm: 3,  md:3, lg: 4, xl: 5 }}
-      spacing={{ base: 6, sm: 'xl', md:'md', lg:'sm' }}
+      spacing={{ base: 6, sm: 'xl', md:'md', lg:'sm', xl:'xs' }}
       verticalSpacing={{ base: 'xl', sm: 'xl' }}
     >
     {userData.map((user) => (
-        <Cardmain key={user.id} user={user} />
+          <Cardmain key={user.id} user={user} onDelete={() => handleDelete(user.id)} />
       ))}
     </SimpleGrid >
    
