@@ -14,7 +14,7 @@ function generateAvatarUrl(userName: string): string {
   } 
 
 
-export default function Cardmain({ user, onDelete }: { user: any, onDelete: any }) {
+ function Cardmain({ user, onDelete }: { user: any, onDelete: any }) {
     
    const [isFollowing, setIsFollowing] = useState(false);
 
@@ -82,3 +82,5 @@ export default function Cardmain({ user, onDelete }: { user: any, onDelete: any 
       </Group>
     );
   }
+
+  export default Cardmain
