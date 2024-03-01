@@ -4,8 +4,6 @@ import { useState } from 'react';
 import { Avatar, Text, Button, Paper, Group, Anchor } from '@mantine/core';
 import { IconPhoneCall, IconAt, IconWorldWww, IconUserPlus,IconTrash, IconUserMinus, IconStar } from '@tabler/icons-react';
 import classes from './UserInfoIcons.module.css';
-import cardclasses from './Card.module.css'
-import Link from 'next/link';
 import linksstyle from './Link.module.css'
 
 
@@ -16,7 +14,7 @@ function generateAvatarUrl(userName: string): string {
   } 
 
 
-export default function Cardmain({ user, onDelete }: { user: User, onDelete: any }) {
+export default function Cardmain({ user, onDelete }: { user: any, onDelete: any }) {
     
    const [isFollowing, setIsFollowing] = useState(false);
 
