@@ -8,9 +8,7 @@ interface User {
   name: string;
   email: string;
   phone: number;
-  company: {
-    bs: string;
-  };
+  website: string;
 }
 
 export default function HomePage() {

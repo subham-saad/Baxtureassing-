@@ -33,9 +33,9 @@ function generateAvatarUrl(userName: string): string {
         <Group wrap="nowrap" gap={4} mt={3}>
         <IconAt stroke={1.5} size="1rem" className={classes.icon} />
         <Text ta="center" c="dimmed" fz="sm">
-          <Anchor target='_blank' underline='hover' c='dimmed' href='#'>
+        <Anchor target='_blank' underline='hover' c='dimmed' type='email' href={`mailto:${user.email}`} >
             {user.email} 
-          </Anchor>
+        </Anchor>
         </Text>
   
         </Group>
@@ -43,7 +43,7 @@ function generateAvatarUrl(userName: string): string {
         <Group wrap="nowrap" gap={4} mt={3}>
         <IconPhoneCall stroke={1.5} size="1rem" className={classes.icon} />
         <Text ta="center" c="dimmed" fz="sm">
-        <Anchor target='_blank' underline='hover' c='dimmed' href={`${user.phone}`}>
+        <Anchor target='_blank' underline='hover' c='dimmed'  href={`tel:${user.phone}`}>
           {user.phone}
         </Anchor> 
         </Text>
@@ -53,8 +53,8 @@ function generateAvatarUrl(userName: string): string {
         <IconWorldWww stroke={1.5} size="1rem" className={classes.icon} />
        
       <Text ta="center" c="dimmed" fz="sm">
-        <a className={linksstyle.customLink}  href={user.company.bs} target="_blank" rel="noopener noreferrer">
-          {user.company.bs}
+        <a className={linksstyle.customLink} href={`https://${user.website}`} target="_blank" rel="noopener noreferrer">
+          {user.website}
         </a>
       </Text>  
         </Group>
